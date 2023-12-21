@@ -4,9 +4,9 @@ class Coordinate:
         self.y = y
 
 class SingleLinearRegression:
-    data = []
 
     def __init__(self, data, learning_rate = 0.01):
+        self.data = []
         for i in data:
             self.data.append(Coordinate(i[0],i[1]))
         self.m = 0
