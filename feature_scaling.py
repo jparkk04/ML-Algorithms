@@ -8,11 +8,11 @@ class Normalize:
         for i in range(len(data[0])):
             single_feature = np.array([])
             for j in range(len(data)):
-                single_feature.append(data[j][i])
-            self.feature_array.append(single_feature)
+                np.insert(single_feature, single_feature.size, data[j][i])
+            np.insert(self.feature_array, self.feature_array.size ,single_feature)
         max_array = np.array([])
-        for i in range(self.feature_array):
-            max_array.append(max(self.feature_array[i]))
+        for i in range(len(self.feature_array)):
+            np.insert(max_array, max_array.size, max(self.feature_array[i]))
         self.normalized_array = self.normalize_data()
 
 class MaxNormalize(Normalize):
