@@ -3,17 +3,10 @@ import copy
 
 class Normalize:
     def __init__(self, data):
-        self.data = np.array(data)
-        self.feature_array = np.array([])
-        for i in range(len(data[0])):
-            single_feature = np.array([])
-            for j in range(len(data)):
-                np.insert(single_feature, single_feature.size, data[j][i])
-            np.insert(self.feature_array, self.feature_array.size ,single_feature)
-        max_array = np.array([])
-        for i in range(len(self.feature_array)):
-            np.insert(max_array, max_array.size, max(self.feature_array[i]))
-        self.normalized_array = self.normalize_data()
+        self.data = np.array(data, dtype=float)
+        self.feature_array = self.data.T
+        self.max_array = self.feature_array.max(axis=1)
+        self.normalize_data()
 
 class MaxNormalize(Normalize):
     def __init__(self, data):
@@ -21,8 +14,8 @@ class MaxNormalize(Normalize):
     
     def normalize_data(self):
         new_array = copy.deepcopy(self.feature_array)
-        for i in range(len(new_array)):
-            new_array[i] /= self.max_array[i]
+        new_array = (new_array.T / self.max_array).T
+        self.normalized_array = new_array
         return new_array
     
     def get_normalized_array(self):
