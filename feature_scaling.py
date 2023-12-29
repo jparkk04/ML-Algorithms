@@ -39,3 +39,19 @@ class MeanNormalize(Normalize):
         new_array = ((new_array.T - self.mean_array)/(self.max_array - self.min_array)).T
         self.normalized_array = new_array
         return new_array
+    
+    def get_normalized_data(self):
+        return self.normalized_array
+    
+class ZScoreNormalize(Normalize):
+    def __init__(self, data):
+        super().__init__(data)
+        self.mean_array = self.feature_array.mean(axis=1)
+        self.std_array = self.feature_array.std(axis=1)
+    def normalize_data(self):
+        new_array = copy.deepcopy(self.feature_array)
+        new_array = ((new_array.T - self.mean_array)/self.std_array).T
+        self.normalized_array = new_array
+
+    def get_normalized_data(self):
+        return self.normalized_array
