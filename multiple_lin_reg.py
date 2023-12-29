@@ -10,7 +10,7 @@ class MultipleLinearRegression:
         self.learning_rate = learning_rate
 
     def calculate(self, xi):
-        return np.dot(self.w,xi) + self.b #works properly
+        return np.dot(self.w,xi) + self.b
     
     def cost(self):
         cost = 0
