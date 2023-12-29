@@ -22,9 +22,8 @@ class MaxNormalize(Normalize):
         return self.normalized_array
     
     def normalize_single_input(self,input):
-        new_input = copy.deepcopy(input)
-        for i in range(len(input)):
-            new_input[i] /= self.max_array[i]
+        normalized_input = input/self.max_array
+        return normalized_input
 
 class MeanNormalize(Normalize):
     def __init__(self, data):
@@ -43,6 +42,10 @@ class MeanNormalize(Normalize):
     def get_normalized_data(self):
         return self.normalized_array
     
+    def normalize_single_input(self,input):
+        normalized_input = (input - self.mean_array)/(self.max_array - self.min_array)
+        return normalized_input
+    
 class ZScoreNormalize(Normalize):
     def __init__(self, data):
         super().__init__(data)
@@ -55,3 +58,7 @@ class ZScoreNormalize(Normalize):
 
     def get_normalized_data(self):
         return self.normalized_array
+    
+    def normalize_single_input(self,input):
+        normalized_input = (input - self.mean_array)/self.std_array
+        return normalized_input
