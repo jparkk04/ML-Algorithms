@@ -15,14 +15,14 @@ class MultipleLinearRegression:
     def cost(self):
         cost = 0
         for i in range(len(self.x)):
-            cost += (self.calculate(self.x[i]) - self.y[i])**2
+            cost += (self.y[i] - self.calculate(self.x[i]))**2
         cost /= len(self.x)
         return cost
     
     def dcostdb(self):
         d = 0
         for i in range(len(self.x)):
-            d += 2*(self.calculate(self.x[i]) - self.y[i])
+            d += -2*(self.y[i] - self.calculate(self.x[i]))
         d /= len(self.x)
         return d
     
@@ -31,7 +31,7 @@ class MultipleLinearRegression:
         for i in range(len(self.w)):
             d = 0
             for j in range(len(self.x)):
-                d += 2*(self.calculate(self.x[i]) - self.y[i])*self.x[j][i]
+                d += -2*(self.y[i] - self.calculate(self.x[i]))*self.x[j][i]
             dlist[i] = d
         return dlist
     

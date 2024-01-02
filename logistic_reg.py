@@ -18,3 +18,10 @@ class LogisticRegression:
     
     def f(self,x):
         return self.sigmoid(self.z(x))
+    
+    def cost(self):
+        cost = 0
+        for i in range(len(self.x)):
+            fval = self.f(self.x[i])
+            cost += -self.y[i]*math.log(fval) - (1 - self.y[i])*math.log(1 - fval)
+        return cost
