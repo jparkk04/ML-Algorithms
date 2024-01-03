@@ -16,7 +16,7 @@ class LogisticRegression:
     def sigmoid(self, z):
         return 1/(1 - math.e**(-z))
     
-    def f(self,x):
+    def f(self, x):
         return self.sigmoid(self.z(x))
     
     def cost(self):
@@ -25,3 +25,8 @@ class LogisticRegression:
             fval = self.f(self.x[i])
             cost += -self.y[i]*math.log(fval) - (1 - self.y[i])*math.log(1 - fval)
         return cost
+    
+    def predict(self, x):
+        if self.f(x) >= self.decision_boundary:
+            return 1
+        return 0
