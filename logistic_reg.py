@@ -26,6 +26,13 @@ class LogisticRegression:
             cost += -self.y[i]*math.log(fval) - (1 - self.y[i])*math.log(1 - fval)
         return cost
     
+    def dcostdb(self):
+        d = 0
+        for i in range(len(self.x)):
+            d += self.f(self.x[i]) - self.y[i]
+        d /= len(self.x)
+        return d
+    
     def predict(self, x):
         if self.f(x) >= self.decision_boundary:
             return 1
