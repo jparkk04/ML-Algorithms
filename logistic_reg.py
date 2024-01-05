@@ -33,6 +33,16 @@ class LogisticRegression:
         d /= len(self.x)
         return d
     
+    def dcostdw(self):
+        d_arr = np.zeros(len(self.w))
+        for i in range(len(self.w)):
+            d = 0
+            for j in range(len(self.x)):
+                d += (self.f(self.x[i]) - self.y[i])*self.x[j][i]
+            d_arr[i] = d
+        return d_arr
+
+    
     def predict(self, x):
         if self.f(x) >= self.decision_boundary:
             return 1
