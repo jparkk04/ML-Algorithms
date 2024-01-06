@@ -41,6 +41,12 @@ class LogisticRegression:
                 d += (self.f(self.x[i]) - self.y[i])*self.x[j][i]
             d_arr[i] = d
         return d_arr
+    
+    def epoch(self):
+        dcdb = self.dcostdb()
+        dcdw = self.dcostdw()
+        self.w -= self.learning_rate*dcdw
+        self.b -= self.learning_rate*dcdb
 
     
     def predict(self, x):
