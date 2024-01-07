@@ -48,6 +48,11 @@ class LogisticRegression:
         self.w -= self.learning_rate*dcdw
         self.b -= self.learning_rate*dcdb
 
+    def iterate(self, repeat):
+        for _ in range(repeat):
+            self.epoch()
+            print(f'cost {self.cost()}')
+
     
     def predict(self, x):
         if self.f(x) >= self.decision_boundary:
