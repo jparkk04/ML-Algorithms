@@ -21,19 +21,21 @@ class MultipleLinearRegression:
     
     def dcostdb(self):
         d = 0
-        for i in range(len(self.x)):
-            d += -2*(self.y[i] - self.calculate(self.x[i]))
+        for i in range(len(self.x)): #each datapoint
+            d += 2*(self.calculate(self.x[i]) - self.y[i])
         d /= len(self.x)
         return d
     
     def dcostdw(self):
         dlist = np.zeros(len(self.w))
-        for i in range(len(self.w)):
+        for i in range(len(self.w)): #each weight
             d = 0
-            for j in range(len(self.x)):
-                d += -2*(self.y[i] - self.calculate(self.x[i]))*self.x[j][i]
+            for j in range(len(self.x)): #each datapoint
+                d += 2*(self.calculate(self.x[i]) - self.y[j])*self.x[j][i]
+            d /= len(self.x)
             dlist[i] = d
         return dlist
+
     
     def epoch(self):
         dcdb = self.dcostdb()
@@ -45,4 +47,3 @@ class MultipleLinearRegression:
         for _ in range(repeat):
             self.epoch()
             print(f'cost {self.cost()}')
-            
