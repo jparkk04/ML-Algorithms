@@ -13,16 +13,16 @@ class MultipleLinearRegression:
         return np.dot(self.w,xi) + self.b
     
     def cost(self):
-        cost = 0
+        cost = 0.0
         for i in range(len(self.x)):
-            cost += (self.y[i] - self.calculate(self.x[i]))**2
-        cost /= len(self.x)
+            cost += (self.calculate(self.x[i]) - self.y[i])**2
+        cost /= 2*len(self.x)
         return cost
     
     def dcostdb(self):
-        d = 0
+        d = 0.0
         for i in range(len(self.x)): #each datapoint
-            d += 2*(self.calculate(self.x[i]) - self.y[i])
+            d += (self.calculate(self.x[i]) - self.y[i])
         d /= len(self.x)
         return d
     
