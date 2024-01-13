@@ -28,9 +28,9 @@ class MultipleLinearRegression:
     
     def dcostdw(self):
         dlist = np.zeros(len(self.w))
-        for i in range(len(self.w)): #each weight
+        for i in range(len(self.w)):
             d = 0
-            for j in range(len(self.x)): #each datapoint
+            for j in range(len(self.x)):
                 d += 2*(self.calculate(self.x[i]) - self.y[j])*self.x[j][i]
             d /= len(self.x)
             dlist[i] = d
